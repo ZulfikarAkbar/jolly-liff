@@ -1,6 +1,6 @@
 window.onload = function() {
     const useNodeJS = false;   // if you are not using a node server, set this value to false
-    const defaultLiffId = "1655335438-WNGwJZ7n";   // 1655335438-WNGwJZ7n change the default LIFF value if you are not using a node server
+    const defaultLiffId = "1655335438-WNGwJZ7n";   // change the default LIFF value if you are not using a node server
  
     // DO NOT CHANGE THIS
     let myLiffId = "";
@@ -105,13 +105,13 @@ function registerButtonHandlers() {
         });
     });
 
-    document.getElementById('closeWindowButton').addEventListener('click', function() {
-        if (!liff.isInClient()) {
-            sendAlertIfNotInClient();
-        } else {
-            liff.closeWindow();
-        }
-    });
+    // document.getElementById('closeWindowButton').addEventListener('click', function() {
+    //     if (!liff.isInClient()) {
+    //         sendAlertIfNotInClient();
+    //     } else {
+    //         liff.closeWindow();
+    //     }
+    // });
 
     document.getElementById('liffLoginButton').addEventListener('click', function() {
         if (!liff.isLoggedIn()) {

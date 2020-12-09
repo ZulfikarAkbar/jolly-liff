@@ -1,4 +1,4 @@
-#alert-service
+#alert-service, #reset_btn, #sendMessageButton
 {
     align-items: center;
     width: 100%;
@@ -22,13 +22,21 @@
     margin: auto;
     padding: auto;
 }
-h2, #menu, #qty_title, #qty_order, #order_table
+#menu, #reset_btn
+{
+    color: black;
+    background-color: cornsilk
+}
+nav{
+    background-color:  cornsilk
+}
+h2, #qty_title, #qty_order
 {
     text-align: center;
     color: black;
     
 }
-#order, #reset_btn, #sendMessageButton
+#order, #reset_btn, #sendMessageButton, #order_btn
 {
     height: 55px;
 }
