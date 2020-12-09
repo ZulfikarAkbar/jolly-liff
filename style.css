@@ -1,0 +1,52 @@
+#alert-service
+{
+    align-items: center;
+    width: 100%;
+}
+.card
+{
+    width: 18rem; 
+    margin: auto; 
+    margin-top: 20px;
+}
+.btn
+{
+    width:100%;
+    margin:auto;
+    margin-top: 20px;
+}
+.col-xl-4
+{
+    text-align: center;
+    align-items: center;
+    margin: auto;
+    padding: auto;
+}
+h2, #menu, #qty_title, #qty_order, #order_table
+{
+    text-align: center;
+    color: black;
+    
+}
+#order, #reset_btn, #sendMessageButton
+{
+    height: 55px;
+}
+.card-title, #menu, #qty_title, #price_title, #purchase_title, #total_price_title, #total_price
+{
+    font-weight: bold;
+}
+#list_order, #total_price, #total_price_title, #price_title, #price_order
+{
+    text-align: right;
+}
+
+#dollar-sign, 
+#price1, #price2, #price3, #price4,
+#price5, #price6, #price7, #price8,
+#price9, #price10, #price11, #price12,
+#price13, #price14, #price15, #price16
+{
+    color:cornflowerblue;
+    font-weight: bold;
+}

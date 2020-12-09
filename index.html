@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>JajanSkuy</title>
+</head>
+<body onload="showOrderItems()">
+    <br>
+    <h2>Restaurant Order Forms</h2>
+    <hr>
+    <div id="liffAppContent" >
+        <div id="isInClient" class="container-fluid">
+            <div id="alert-service">
+                <div class="row">
+                    <div id="isInClientMessage"></div>
+                </div>
+            </div>
+            
+             <br>
+    
+            <form id="form-data">
+                <a data-toggle="collapse" href="#collapse1" role="button" aria-expanded="false" aria-controls="collapse1">
+                    <h5 id="menu">Appetizers <i class="fa fa-angle-down"></i></h5>
+                </a> 
+                <div class="collapse" id="collapse1">
+                    <div class="container-fluid">
+                        <!-- image source 
+                            https://www.tasteofhome.com/collection/awesome-ideas-appetizer-recipes/ 
+                        -->
+                        <hr>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="card">
+                                    <img src="img/ap-1.jpg" class="card-img-top" alt="image not found">
+                                    <div class="card-body">
+                                        <h5 class="card-title" id="menu_name1" name="menu_name">Tuscan Sausage and Bean Dip</h5>
+                                        <h5 id="dollar-sign">$</h5><h5 id="price1" name="price">8.00</h5>
+                                        Quantity
+                                        <select id="qty1" name="qty" class="form-control">
+                                            <option selected hidden disabled>Qty</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                        <input class="btn btn-success" type="button" value="+ Add to cart" onclick="addToCart1()">     
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="card">
+                                    <img src="img/ap-2.jpg" class="card-img-top" alt="image not found">
+                                    <div class="card-body">
+                                        <h5 class="card-title" id="menu_name2" name="menu_name">Chicken Skewers with Sweet and Spicy Marmalade</h5>
+                                        <h5 id="dollar-sign">$</h5><h5 id="price2" name="price">7.00</h5>
+                                        Quantity
+                                        <select id="qty2" name="qty" class="form-control">
+                                            <option selected hidden disabled>Qty</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                        
+                                        <input class="btn btn-success" type="button" value="+ Add to cart" onclick="addToCart2()">
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="card">
+                                    <img src="img/ap-3.jpg" class="card-img-top" alt="image not found">
+                                    <div class="card-body">
+                                        <h5 class="card-title" id="menu_name3" name="menu_name">Romaine and Cherry Tomato Salad</h5>
+                                        <h5 id="dollar-sign">$</h5><h5 id="price3" name="price">6.00</h5>
+                                        Quantity
+                                        <select id="qty3" name="qty" class="form-control">
+                                            <option selected hidden disabled>Qty</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                        <input class="btn btn-success" type="button" value="+ Add to cart" onclick="addToCart3()"> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="card">
+                                    <img src="img/ap-4.jpg" class="card-img-top" alt="image not found">
+                                    <div class="card-body">
+                                        <h5 class="card-title" id="menu_name4" name="menu_name">Crispy Sriracha Spring Rolls</h5>
+                                        <h5 id="dollar-sign">$</h5><h5 id="price4" name="price">5.00</h5>
+                                        Quantity
+                                        <select id="qty4" name="qty" class="form-control">
+                                            <option selected hidden disabled>Qty</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                        <input class="btn btn-success" type="button" value="+ Add to cart" onclick="addToCart4()"> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <br>
+    
+                <a data-toggle="collapse" href="#collapse2" role="button" aria-expanded="false" aria-controls="collapse2">
+                    <h5 id="menu">Soups <i class="fa fa-angle-down"></i></h5>
+                </a> 
+                <div class="collapse" id="collapse2">
+                    <div class="container-fluid">
+                        <!-- 
+                            image source https://themodernproper.com/30-best-soup-recipes 
+                        -->
+                        <hr>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="card">
+                                    <img src="img/so-1.jpg" class="card-img-top" alt="image not found">
+                                    <div class="card-body">
+                                        <h5 class="card-title" id="menu_name5" name="menu_name">Chicken Meatball and Vegetable Soup</h5>
+                                        <h5 id="dollar-sign">$</h5><h5 id="price5" name="price">5.00</h5>
+                                        Quantity
+                                        <select id="qty5" name="qty" class="form-control">
+                                            <option selected hidden disabled>Qty</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                        <input class="btn btn-success" type="button" value="+ Add to cart" onclick="addToCart5()">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="card">
+                                    <img src="img/so-2.jpg" class="card-img-top" alt="image not found">
+                                    <div class="card-body">
+                                        <h5 class="card-title" id="menu_name6" name="menu_name">Simple Seafood Bisque</h5>
+                                        <h5 id="dollar-sign">$</h5><h5 id="price6" name="price">6.00</h5>
+                                        Quantity
+                                        <select id="qty6" name="qty" class="form-control">
+                                            <option selected hidden disabled>Qty</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                        <input class="btn btn-success" type="button" value="+ Add to cart" onclick="addToCart6()"> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="card">
+                                    <img src="img/so-3.jpg" class="card-img-top" alt="image not found">
+                                    <div class="card-body">
+                                        <h5 class="card-title" id="menu_name7" name="menu_name">Wild Mushroom Chowder with Bacon and Leeks</h5>
+                                        <h5 id="dollar-sign">$</h5><h5 id="price7" name="price">7.00</h5>
+                                        Quantity
+                                        <select id="qty7" name="qty" class="form-control">
+                                            <option selected hidden disabled>Qty</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                        <input class="btn btn-success" type="button" value="+ Add to cart" onclick="addToCart7()">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="card">
+                                    <img src="img/so-4.jpg" class="card-img-top" alt="image not found">
+                                    <div class="card-body">
+                                        <h5 class="card-title" id="menu_name8" name="menu_name">Curried Pumpkin Soup</h5>
+                                        <h5 id="dollar-sign">$</h5><h5 id="price8" name="price">4.00</h5>
+                                        Quantity
+                                        <select id="qty8" name="qty" class="form-control">
+                                            <option selected hidden disabled>Qty</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                        <input class="btn btn-success" type="button" value="+ Add to cart" onclick="addToCart8()">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <br>
+    
+                <a data-toggle="collapse" href="#collapse3" role="button" aria-expanded="false" aria-controls="collapse3">
+                    <h5 id="menu">Drinks <i class="fa fa-angle-down"></i></h5>
+                </a> 
+                <div class="collapse" id="collapse3">
+                    <div class="container-fluid">
+                        <!-- image source 
+                            https://www.delish.com/content/drink-recipes/
+                            https://www.liquor.com/recipes/
+                        -->
+                        <hr>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="card">
+                                    <img src="img/d1.jpg" class="card-img-top" alt="image not found">
+                                    <div class="card-body">
+                                        <h5 class="card-title"  id="menu_name9" name="menu_name">Pink Lemonade Sangria</h5>
+                                        <h5 id="dollar-sign">$</h5><h5 id="price9" name="price">5.00</h5>
+                                        Quantity
+                                        <select id="qty9" name="qty" class="form-control">
+                                            <option selected hidden disabled>Qty</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                        <input class="btn btn-success" type="button" value="+ Add to cart" onclick="addToCart9()"> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="card">
+                                    <img src="img/d2.jpg" class="card-img-top" alt="image not found">
+                                    <div class="card-body">
+                                        <h5 class="card-title"  id="menu_name10" name="menu_name">Mojito</h5>
+                                        <h5 id="dollar-sign">$</h5><h5 id="price10" name="price">6.00</h5>
+                                        Quantity
+                                        <select id="qty10" name="qty" class="form-control">
+                                            <option selected hidden disabled>Qty</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                        <input class="btn btn-success" type="button" value="+ Add to cart" onclick="addToCart10()"> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="card">
+                                    <img src="img/d3.jpg" class="card-img-top" alt="image not found">
+                                    <div class="card-body">
+                                        <h5 class="card-title"  id="menu_name11" name="menu_name">“Harry Potter” Butterbeer</h5>
+                                        <h5 id="dollar-sign">$</h5><h5 id="price11" name="price">7.00</h5>
+                                        Quantity
+                                        <select id="qty11" name="qty" class="form-control">
+                                            <option selected hidden disabled>Qty</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                        <input class="btn btn-success" type="button" value="+ Add to cart" onclick="addToCart11()"> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="card">
+                                    <img src="img/d4.jpg" class="card-img-top" alt="image not found">
+                                    <div class="card-body">
+                                        <h5 class="card-title"  id="menu_name12" name="menu_name">Margarita</h5>
+                                        <h5 id="dollar-sign">$</h5><h5 id="price12" name="price">4.00</h5>
+                                        Quantity
+                                        <select id="qty12" name="qty" class="form-control">
+                                            <option selected hidden disabled>Qty</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                        <input class="btn btn-success" type="button" value="+ Add to cart" onclick="addToCart12()"> 
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+                
+                <br>
+    
+                <a data-toggle="collapse" href="#collapse4" role="button" aria-expanded="false" aria-controls="collapse4">
+                    <h5 id="menu">Desserts <i class="fa fa-angle-down"></i></h5>
+                </a> 
+                <div class="collapse" id="collapse4">
+                    <div class="container-fluid">
+                        <!-- image source 
+                            https://www.tasteofhome.com/collection/the-best-desserts/
+                        -->
+                        <hr>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="card">
+                                    <img src="img/de1.jpg" class="card-img-top" alt="image not found">
+                                    <div class="card-body">
+                                        <h5 class="card-title"  id="menu_name13" name="menu_name">Fried Ice Cream Dessert Bars</h5>
+                                        <h5 id="dollar-sign">$</h5><h5 id="price13" name="price">5.00</h5>
+                                        Quantity
+                                        <select id="qty13" name="qty" class="form-control">
+                                            <option selected hidden disabled>Qty</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                        <input class="btn btn-success" type="button" value="+ Add to cart" onclick="addToCart13()"> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="card">
+                                    <img src="img/de2.jpg" class="card-img-top" alt="image not found">
+                                    <div class="card-body">
+                                        <h5 class="card-title"  id="menu_name14" name="menu_name">Strawberry Pretzel</h5>
+                                        <h5 id="dollar-sign">$</h5><h5 id="price14" name="price">6.00</h5>
+                                        Quantity
+                                        <select id="qty14" name="qty" class="form-control">
+                                            <option selected hidden disabled>Qty</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                        <input class="btn btn-success" type="button" value="+ Add to cart" onclick="addToCart14()"> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="card">
+                                    <img src="img/de3.jpg" class="card-img-top" alt="image not found">
+                                    <div class="card-body">
+                                        <h5 class="card-title"  id="menu_name15" name="menu_name">Apple Pie</h5>
+                                        <h5 id="dollar-sign">$</h5><h5 id="price15" name="price">7.00</h5>
+                                        Quantity
+                                        <select id="qty15" name="qty" class="form-control">
+                                            <option selected hidden disabled>Qty</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                        <input class="btn btn-success" type="button" value="+ Add to cart" onclick="addToCart15()"> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="card">
+                                    <img src="img/de4.jpg" class="card-img-top" alt="image not found">
+                                    <div class="card-body">
+                                        <h5 class="card-title"  id="menu_name16" name="menu_name">German Black Forest Cake</h5>
+                                        <h5 id="dollar-sign">$</h5><h5 id="price16" name="price">4.00</h5>
+                                        Quantity
+                                        <select id="qty16" name="qty" class="form-control">
+                                            <option selected hidden disabled>Qty</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                        <input class="btn btn-success" type="button" value="+ Add to cart" onclick="addToCart16()"> 
+                                    </div>
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+    
+                <hr>
+    
+                <div class="container" id="final_order">
+                    <div class="row">
+                        <table id="order_table" width=100%>
+                            <tr id="thead">
+                                <th>Name</th>
+                                <th>Qty</th>
+                                <th>Price ($)</th>
+                                <th>Price total($)</th>
+                                <th>Action</th>
+                            </tr>  
+                        </table>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-6" id="total_price_title">TOTAL ($)</div>
+                        <div class="col-6" id="total_price"></div>
+                    </div>
+                    <br>
+                </div>
+                <input id="reset_btn" class="btn btn-secondary" type="button" onclick="resetOrder()" value="X cancel">
+                <input id="sendMessageButton" value="Check out" type="button" onclick="orderNow()" class="btn btn-success">
+            </form>
+            
+            
+            
+            <div class="row">
+                <div class="col-xl-4"></div>
+                <div class="col-xl-4">
+                    <button class="btn" id="openWindowButton">Open in external browser <i class="fa fa-chevron-circle-right"></i></button>
+                    <button style="width: 100%;" id="liffLoginButton" class="btn btn-success">
+                        <img class="icon icons8-Line" 
+                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABAC
+                        AYAAACqaXHeAAAElklEQVR4Xu2ab8hfYxjHP9/SQlZe+BMp2wgZppRFmT1eKD
+                        N/8ucVDTXSmpTaJMu2F5vsjVeKIpYQNcS0vOEJJa+MoY2slUjywr9C1KXr6T51
+                        Os55zjn3uc/v/Op3rvr16+n+e33u67ru675+j5hx0YzrzwhgtIAZJzC6wIwbwB
+                        gERxcYXWDGCYwuMOMGMPlbwMxOBpblPn4Gx7KPpF8meSi9uoCZnQXMAZeEzyrg
+                        9BoFvwc+AT4FvgAOSPq7Lyi9ADCzi4C7gLuBUzpu/mvgFeAlSd90nOt/w5MCCO
+                        a9HdgMHJd4s38BTwM7U7pJMgBmdjPgyl+aWPHidAcDhDdTrJMEgJntCMqn2FPT
+                        OdwSfN1O0hnAQMpnSneG0AnAwMpnEHZI2hlrBtEAzOx6YH/swonHrZf0TsycUQ
+                        DMzCP8B8AVMYv2MOZjYI2kf9vOHQtgiKBXp1tUPGgNIJz+IeCCuh1NuP2QJM84
+                        W0kMgDuBF0tW+QHYBZxWcSV6oPoSeAr4DdgIPAh4/pBJcQ5/I+wF5gvrbQHWle
+                        zhJklvtSEQA8ADnwfAosxLmjOztcD7xUZJC2uZ2UJb6OsPI/87S56Kc9wj6YXi
+                        XGb2fEizi017JXn63VhiAHwLrEgBIADxk8wieBHAnKR5M3Ol/G2RyWXA0pI9HJ
+                        HUyjVbATCzk4DfK/DGWMDaoGAWVKsAtAm6J0r6s6kJtAXgrzwPgGUSDSBYgvvu0
+                        oIbZRbgbpWXqhjgfVZJ+rwvABeGQJYMAHCjpIfM7Azg5TIALWKAd71YktcRGkkr
+                        CwgnZSktIATBGyTtNzPP6Pw7C6SZBbgLXN0gBniXJZL+aaS9B+OmHbN+ZuZ0V5a
+                        My1zA7+LPiu0Vt0Cm6FHPKiX9FCCXAfCndp0clXROXad8ewyAZ4D7FgFwArA61/
+                        4IcG0NAO/+rKR7KwC463l+kUlVDNgn6ba+AdwOvFYFoMRfN4XkZ7mkY4U8YD3wdm
+                        7MQjqbc4HS9HaRPGCDpLIkrZJJjAV4ofO7ihl/DoXMfPN5wJnAu4DnEA7Er9J9wJ
+                        WAt+fFsz6/4/2u9zKYZ4M/FvqU5QG/AmdL8u/G0hpAMNEngK2NV5lMxz2SHm67VC
+                        wAr/R+BJzfdsGe+r8u6daYuaMABCuoehTF7KPLGE961kny3xNaSzSAAKFNitp6cw
+                        0G+KvSr8+vGvQt7dIJwBRAWNlFed9/ZwABwjXhRXd87ElEjLtKksehTpIEQIDgb/
+                        rdwHWddlQ/2LPF1Z5T1Het75EMQLaUmd0BPFDIBut30qyHn7i/D1oXP6umTw4gB+
+                        IWwK8m/07hGs9J8jJaUukNQA7EcuBy4NxQSfJqUlVFp0w5L248KunJpJqHyXoHUL
+                        bp8Cvy/cDjNUq9B2yT5HX/XmQQACFoejX4jUW02iVpWy9a5yYdEoC/JfxNURT/z5
+                        DHvDDSt/I+/5AAvBxerPW5S+yW9McklB8agN/npwZFD3g8kPThpBTP1hnaAg77rz
+                        6SXp204oMDGErh4rqDWcAIYEoIjBYwJQcx2DZGCxgM/ZQsPFrAlBzEYNsYLWAw9F
+                        Oy8MxbwH80Lc5Q8VGPVAAAAABJRU5ErkJggg==" width="40" height="40">
+                        Log in to <strong>LINE</strong>
+                    </button>
+                    <button class="btn" id="liffLogoutButton">Logout <i class="fa fa-arrow-right"></i></button>
+                </div>
+                <div class="col-xl-4"></div>
+           </div>
+    
+        </div>
+    </div>
+    <br>
+    
+    <div class="container alert alert-warning" role="alert">
+        <!-- LIFF ID ERROR -->
+        <div id="liffIdErrorMessage" class="hidden">
+            <p>You have not assigned any value for LIFF ID.</p>
+            <p>If you are running the app using Node.js, please set the LIFF ID as an environment variable in your
+                Heroku account follwing the below steps: </p>
+            <code id="code-block">
+                <ol>
+                    <li>Go to `Dashboard` in your Heroku account.</li>
+                    <li>Click on the app you just created.</li>
+                    <li>Click on `Settings` and toggle `Reveal Config Vars`.</li>
+                    <li>Set `MY_LIFF_ID` as the key and the LIFF ID as the value.</li>
+                    <li>Your app should be up and running. Enter the URL of your app in a web browser.</li>
+                </ol>
+            </code>
+            <p>If you are using any other platform, please add your LIFF ID in the <code>index.html</code> file.</p>
+            <p>For more information about how to add your LIFF ID, see <a
+                    href="https://developers.line.biz/en/reference/liff/#initialize-liff-app">Initializing the LIFF
+                    app</a>.</p>
+        </div>
+        <!-- LIFF INIT ERROR -->
+        <div id="liffInitErrorMessage" class="hidden">
+            <p>Something went wrong with LIFF initialization.</p>
+            <p>LIFF initialization can fail if a user clicks "Cancel" on the "Grant permission" screen, or if an error occurs in the process of <code>liff.init()</code>.
+        </div>
+        <!-- NODE.JS LIFF ID ERROR -->
+        <div id="nodeLiffIdErrorMessage" class="hidden">
+            <p>Unable to receive the LIFF ID as an environment variable.</p>
+        </div>
+    </div>
+
+    <br>
+
+</body>
+<script src="config.js"></script>
+<script src="liff-starter.js"></script>
+<!-- LIFF SDK -->
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+
+
+</html>
