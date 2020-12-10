@@ -3,11 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.js"></script>
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
-    <script src="js/bootstrap.js"></script> -->
-    <!-- <link rel="stylesheet" href="css/bootstrap.css"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
@@ -537,47 +532,16 @@
         </div>
     </div>
 
-
-
-    <br>
-    
-    <!-- <div class="container alert alert-warning" role="alert">
-        
-        <div id="liffIdErrorMessage" class="hidden">
-            <p>You have not assigned any value for LIFF ID.</p>
-            <p>If you are running the app using Node.js, please set the LIFF ID as an environment variable in your
-                Heroku account follwing the below steps: </p>
-            <code id="code-block">
-                <ol>
-                    <li>Go to `Dashboard` in your Heroku account.</li>
-                    <li>Click on the app you just created.</li>
-                    <li>Click on `Settings` and toggle `Reveal Config Vars`.</li>
-                    <li>Set `MY_LIFF_ID` as the key and the LIFF ID as the value.</li>
-                    <li>Your app should be up and running. Enter the URL of your app in a web browser.</li>
-                </ol>
-            </code>
-            <p>If you are using any other platform, please add your LIFF ID in the <code>index.html</code> file.</p>
-            <p>For more information about how to add your LIFF ID, see <a
-                    href="https://developers.line.biz/en/reference/liff/#initialize-liff-app">Initializing the LIFF
-                    app</a>.</p>
-        </div>
-        
-        <div id="liffInitErrorMessage" class="hidden">
-            <p>Something went wrong with LIFF initialization.</p>
-            <p>LIFF initialization can fail if a user clicks "Cancel" on the "Grant permission" screen, or if an error occurs in the process of <code>liff.init()</code>.
-        </div>
-        
-        <div id="nodeLiffIdErrorMessage" class="hidden">
-            <p>Unable to receive the LIFF ID as an environment variable.</p>
-        </div>
-    </div> -->
-
     <br>
 
 </body>
-<script src="config.js"></script>
-<!-- LIFF SDK -->
-<script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-<!-- <script src="rest-liff.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
 
+
+<!-- LIFF SDK -->
+<script type="text/javascript" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+<script type="text/javascript" src="https://static.line-scdn.net/liff/edge/2/ios-extensions.js"></script>
+<script type="text/javascript" src="config.js"></script>
 </html>

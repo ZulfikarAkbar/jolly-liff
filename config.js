@@ -1,76 +1,42 @@
-$(".fa").on("click",function(){
+$(".fa").on("click",function()
+{
     $(this).toggleClass("fa-angle-up");
     $(this).toggleClass("fa-angle-down");
 });
-if(localStorage.getItem('order_data')===null || JSON.parse(localStorage.getItem('order_data'))==0)
+
+// I got problem with LIFF_ID_NOT_FOUND
+const defaultLiffId = "1655335438-WNGwJZ7n";
+let myLiffId = "";
+myLiffId = defaultLiffId;
+initializeLiffOrDie(myLiffId);
+
+function initializeLiffOrDie(myLiffId) 
 {
-    document.getElementById('null_cart').textContent =  'Ooops... your cart is still empty';
-    document.getElementById('order_table').style.display="none";
-    document.getElementById('row_total_price').style.visibility="hidden";
-    document.getElementById('cart_badge').innerHTML = 0;
-}
-else
-{
-    document.getElementById('null_cart').style.visibility="hidden";
-}
-window.onload = function() {
-    const useNodeJS = false;   // if you are not using a node server, set this value to false
-    const defaultLiffId = "1655335438-WNGwJZ7n";   // change the default LIFF value if you are not using a node server
- 
-    // DO NOT CHANGE THIS
-    let myLiffId = "";
- 
-    // if node is used, fetch the environment variable and pass it to the LIFF method
-    // otherwise, pass defaultLiffId
-    if (useNodeJS) {
-        fetch('/send-id')
-            .then(function(reqResponse) {
-                return reqResponse.json();
-            })
-            .then(function(jsonResponse) {
-                myLiffId = jsonResponse.id;
-                initializeLiffOrDie(myLiffId);
-            })
-            .catch(function(error) {
-                // document.getElementById("liffAppContent").classList.add('hidden');
-                // document.getElementById("nodeLiffIdErrorMessage").classList.remove('hidden');
-            });
-    } else {
-        myLiffId = defaultLiffId;
-        initializeLiffOrDie(myLiffId);
-    }
-};
-function initializeLiffOrDie(myLiffId) {
-    if (!myLiffId) {
-        // document.getElementById("liffAppContent").classList.add('hidden');
-        // document.getElementById("liffIdErrorMessage").classList.remove('hidden');
-    } else {
+    if (!myLiffId) 
+    {
+        modal_err_liff_id();
+    } 
+    else 
+    {
         initializeLiff(myLiffId);
     }
 }
-function initializeLiff(myLiffId) {
+function initializeLiff(myLiffId) 
+{
     liff
         .init({
             liffId: myLiffId
         })
         .then(() => {
-            // start to use LIFF's api
             initializeApp();
         })
         .catch((err) => {
-            // document.getElementById("liffAppContent").classList.add('hidden');
-            // document.getElementById("liffInitErrorMessage").classList.remove('hidden');
+            modal_err_liff_id();
         });
 }
-function profile()
+function initializeApp() 
 {
-    document.getElementById('profile_name').innerHTML =  liff.getProfile().displayName;
-    document.getElementById('profile_img').innerHTML =  liff.getProfile().pictureUrl;
-}
-function initializeApp() {
-        //displayLiffData();
     display();
-        // check if the user is logged in/out, and disable inappropriate button
 }
 function display()
 {
@@ -81,22 +47,29 @@ function display()
         profile();
     }
 }
-// function displayIsInClient() {
-//     if (liff.isInClient()) {
-//         document.getElementById('liffLoginButton').style.visibility="hidden";
-//         document.querySelector('.dropdown').style.visibility="show";
-//         profile();
-//     }
-// }
-// function orderNow()
-// {
+function profile()
+{
+    document.getElementById('profile_img').innerHTML =  liff.getProfile().pictureUrl;
+    document.getElementById('profile_name').innerHTML =  liff.getProfile().displayName;
+}
 
-// }
+function modal_err_liff_id()
+{
+    $("#modal_info").modal('show');
+    document.getElementById('modal_title').textContent='ERR_LIFF_ID!';
+    document.getElementById('modal_body').textContent='Ooops... LIFF ID not found';
+    $('#modal_info').on('hidden.bs.modal', function() {
+        location.reload();
+    });
+}
+
+
 function logout()
 {
-    if (liff.isLoggedIn()) {
+    if (liff.isLoggedIn()) 
+    {
         liff.logout();
-        window.location.reload();
+        location.reload();
     }
 }
 function login()
@@ -115,6 +88,7 @@ function openWindowBrowser()
         }
     );
 }
+
 function modal_add_item()
 {
     $("#modal_info").modal('show');
@@ -165,6 +139,17 @@ function showPage(x)
         $('#showAcc').hide();
         
     }
+}
+if(localStorage.getItem('order_data')===null || JSON.parse(localStorage.getItem('order_data'))==0)
+{
+    document.getElementById('null_cart').textContent =  'Ooops... your cart is still empty';
+    document.getElementById('order_table').style.display="none";
+    document.getElementById('row_total_price').style.visibility="hidden";
+    document.getElementById('cart_badge').innerHTML = 0;
+}
+else
+{
+    document.getElementById('null_cart').style.visibility="hidden";
 }
 function showOrderItems()
 {
