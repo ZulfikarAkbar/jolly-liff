@@ -173,11 +173,7 @@ function addToCart1()
     localStorage.setItem('order_data',JSON.stringify(order_data));
     localStorage.setItem('id_order',id_order);
     document.getElementById('form-data').reset();
-    $("#modal_info").modal('show');
-    document.getElementById('modal_body').textContent='Success add this item to cart';
-    $('#modal_info').on('hidden.bs.modal', function() {
-        location.reload();
-    });
+    modal_add_item();
     showPage('showMenu');
     return false;
 }
