@@ -13,6 +13,108 @@ else
 {
     document.getElementById('null_cart').style.visibility="hidden";
 }
+window.onload = function() {
+    const useNodeJS = false;   // if you are not using a node server, set this value to false
+    const defaultLiffId = "1655335438-WNGwJZ7n";   // change the default LIFF value if you are not using a node server
+ 
+    // DO NOT CHANGE THIS
+    let myLiffId = "";
+ 
+    // if node is used, fetch the environment variable and pass it to the LIFF method
+    // otherwise, pass defaultLiffId
+    if (useNodeJS) {
+        fetch('/send-id')
+            .then(function(reqResponse) {
+                return reqResponse.json();
+            })
+            .then(function(jsonResponse) {
+                myLiffId = jsonResponse.id;
+                initializeLiffOrDie(myLiffId);
+            })
+            .catch(function(error) {
+                // document.getElementById("liffAppContent").classList.add('hidden');
+                // document.getElementById("nodeLiffIdErrorMessage").classList.remove('hidden');
+            });
+    } else {
+        myLiffId = defaultLiffId;
+        initializeLiffOrDie(myLiffId);
+    }
+};
+function initializeLiffOrDie(myLiffId) {
+    if (!myLiffId) {
+        // document.getElementById("liffAppContent").classList.add('hidden');
+        // document.getElementById("liffIdErrorMessage").classList.remove('hidden');
+    } else {
+        initializeLiff(myLiffId);
+    }
+}
+function initializeLiff(myLiffId) {
+    liff
+        .init({
+            liffId: myLiffId
+        })
+        .then(() => {
+            // start to use LIFF's api
+            initializeApp();
+        })
+        .catch((err) => {
+            // document.getElementById("liffAppContent").classList.add('hidden');
+            // document.getElementById("liffInitErrorMessage").classList.remove('hidden');
+        });
+}
+function profile()
+{
+    document.getElementById('profile_name').innerHTML =  liff.getProfile().displayName;
+    document.getElementById('profile_img').innerHTML =  liff.getProfile().pictureUrl;
+}
+function initializeApp() {
+        //displayLiffData();
+    display();
+        // check if the user is logged in/out, and disable inappropriate button
+}
+function display()
+{
+    if(liff.isLoggedIn() || liff.isInClient())
+    {
+        document.getElementById('liffLoginButton').style.visibility="hidden";
+        document.querySelector('.dropdown').style.visibility="show";
+        profile();
+    }
+}
+// function displayIsInClient() {
+//     if (liff.isInClient()) {
+//         document.getElementById('liffLoginButton').style.visibility="hidden";
+//         document.querySelector('.dropdown').style.visibility="show";
+//         profile();
+//     }
+// }
+// function orderNow()
+// {
+
+// }
+function logout()
+{
+    if (liff.isLoggedIn()) {
+        liff.logout();
+        window.location.reload();
+    }
+}
+function login()
+{
+    if (!liff.isLoggedIn())
+    {
+        liff.login();
+    }
+}
+function openWindowBrowser()
+{
+    liff.openWindow(
+        {
+            url: 'https://liff-restaurant.herokuapp.com/', // Isi dengan Endpoint URL aplikasi web Anda
+            external: true
+        }
+    );
+}
 function modal_add_item()
 {
     $("#modal_info").modal('show');
@@ -54,21 +156,14 @@ function showPage(x)
         $('#showMenu').show();
         $('#showCart').hide();
         $('#showAcc').hide();
-        $('#showOrderHistory').hide();
+        
     }
     else if(x=='showCart')
     {
         $('#showMenu').hide();
         $('#showCart').show();
         $('#showAcc').hide();
-        $('#showOrderHistory').hide();
-    }
-    else if(x=='showOrderHistory')
-    {
-        $('#showMenu').hide();
-        $('#showCart').hide();
-        $('#showAcc').hide();
-        $('#showOrderHistory').show();
+        
     }
 }
 function showOrderItems()

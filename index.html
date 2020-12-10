@@ -16,13 +16,13 @@
 </head>
 <body onload="showOrderItems()">
     <nav class="navbar navbar-expand-lg sticky-top navbar-light">
-        <a class="navbar-brand" href="#"><strong>J O L L Y</strong></a>
+        <a class="navbar-brand" href="javascript:void(0)" onclick="showPage('showMenu')"><strong>J O L L Y</strong></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                <button id="liffLoginButton" style="height: 40px; width:fit-content;margin: 8px; background-color: cornflowerblue;color: white;" class="btn my-sm-0">
+            <ul id="nav_ul" class="navbar-nav ml-auto mt-2 mt-lg-0">
+                <a id="liffLoginButton" onclick="login()" style="height: 40px; width:fit-content;margin: 8px; background-color: cornflowerblue;color: white;" class="btn my-sm-0">
                     <img class="icon icons8-Line" 
                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABAC
                     AYAAACqaXHeAAAElklEQVR4Xu2ab8hfYxjHP9/SQlZe+BMp2wgZppRFmT1eKD
@@ -52,10 +52,19 @@
                     6SXp204oMDGErh4rqDWcAIYEoIjBYwJQcx2DZGCxgM/ZQsPFrAlBzEYNsYLWAw9F
                     Oy8MxbwH80Lc5Q8VGPVAAAAABJRU5ErkJggg==" width="20" height="20">
                     Log in with <strong>LINE</strong>
-                </button>
-                <button class="btn  my-sm-0" style="height: 40px; width: fit-content; margin: 8px; background-color: deeppink; color: white;">
+                </a>
+                <a id="openWindowButton" onclick="openWindowBrowser()" class="btn my-sm-0" style="height: 40px; width: fit-content; margin: 8px; background-color: deeppink; color: white;">
                     <i class="fa fa-globe"></i> Open with browser
-                </button>
+                </a>
+                <div hidden id="liffLogoutButton" class="dropdown">
+                    <a id="user_profile" class="btn dropdown-toggle my-sm-0" style="height: 40px; width: fit-content; margin: 8px; background-color:white;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img id="profile_img" style="width:15px;height:15px;">
+                        <small id="profile_name"></small>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <a class="dropdown-item" onclick="logout()">Logout</a>
+                    </div>
+                </div>
             </ul>
         </div>
     </nav>
@@ -77,13 +86,6 @@
                     Cart
                 </a>
             </div>
-            <!-- <div class="col-4 text-center">
-                <a class="btn my-2 my-sm-0" href="javascript:void(0)" onclick="showPage('showAcc')">
-                    <i class="fa fa-user"> </i>
-                    <br>
-                    Account
-                </a>
-            </div> -->
         </div>
     </nav>
     <!-- ------------------------------------------------------------------------------------------------------ -->
@@ -130,52 +132,16 @@
             </div>
                            
         </div>
-        <br><br><br> 
+        <br>
+        <br>
+        <br> 
     </div>
     <!-- ------------------------------------------------------------------------------------------------------ -->
     <!-- <div id="showAcc" style="display: none"></div> -->
     <!-- ------------------------------------------------------------------------------------------------------ -->
     <div id="showMenu">
         <div id="" class="container-fluid">
-            <div id="alert-service">
-                <div class="row">
-                    <div id=""></div>
-                    <!-- <button style="width: 50%;" id="liffLoginButton" class="btn btn-success">
-                        <img class="icon icons8-Line" 
-                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABAC
-                        AYAAACqaXHeAAAElklEQVR4Xu2ab8hfYxjHP9/SQlZe+BMp2wgZppRFmT1eKD
-                        N/8ucVDTXSmpTaJMu2F5vsjVeKIpYQNcS0vOEJJa+MoY2slUjywr9C1KXr6T51
-                        Os55zjn3uc/v/Op3rvr16+n+e33u67ru675+j5hx0YzrzwhgtIAZJzC6wIwbwB
-                        gERxcYXWDGCYwuMOMGMPlbwMxOBpblPn4Gx7KPpF8meSi9uoCZnQXMAZeEzyrg
-                        9BoFvwc+AT4FvgAOSPq7Lyi9ADCzi4C7gLuBUzpu/mvgFeAlSd90nOt/w5MCCO
-                        a9HdgMHJd4s38BTwM7U7pJMgBmdjPgyl+aWPHidAcDhDdTrJMEgJntCMqn2FPT
-                        OdwSfN1O0hnAQMpnSneG0AnAwMpnEHZI2hlrBtEAzOx6YH/swonHrZf0TsycUQ
-                        DMzCP8B8AVMYv2MOZjYI2kf9vOHQtgiKBXp1tUPGgNIJz+IeCCuh1NuP2QJM84
-                        W0kMgDuBF0tW+QHYBZxWcSV6oPoSeAr4DdgIPAh4/pBJcQ5/I+wF5gvrbQHWle
-                        zhJklvtSEQA8ADnwfAosxLmjOztcD7xUZJC2uZ2UJb6OsPI/87S56Kc9wj6YXi
-                        XGb2fEizi017JXn63VhiAHwLrEgBIADxk8wieBHAnKR5M3Ol/G2RyWXA0pI9HJ
-                        HUyjVbATCzk4DfK/DGWMDaoGAWVKsAtAm6J0r6s6kJtAXgrzwPgGUSDSBYgvvu0
-                        oIbZRbgbpWXqhjgfVZJ+rwvABeGQJYMAHCjpIfM7Azg5TIALWKAd71YktcRGkkr
-                        CwgnZSktIATBGyTtNzPP6Pw7C6SZBbgLXN0gBniXJZL+aaS9B+OmHbN+ZuZ0V5a
-                        My1zA7+LPiu0Vt0Cm6FHPKiX9FCCXAfCndp0clXROXad8ewyAZ4D7FgFwArA61/
-                        4IcG0NAO/+rKR7KwC463l+kUlVDNgn6ba+AdwOvFYFoMRfN4XkZ7mkY4U8YD3wdm
-                        7MQjqbc4HS9HaRPGCDpLIkrZJJjAV4ofO7ihl/DoXMfPN5wJnAu4DnEA7Er9J9wJ
-                        WAt+fFsz6/4/2u9zKYZ4M/FvqU5QG/AmdL8u/G0hpAMNEngK2NV5lMxz2SHm67VC
-                        wAr/R+BJzfdsGe+r8u6daYuaMABCuoehTF7KPLGE961kny3xNaSzSAAKFNitp6cw
-                        0G+KvSr8+vGvQt7dIJwBRAWNlFed9/ZwABwjXhRXd87ElEjLtKksehTpIEQIDgb/
-                        rdwHWddlQ/2LPF1Z5T1Het75EMQLaUmd0BPFDIBut30qyHn7i/D1oXP6umTw4gB+
-                        IWwK8m/07hGs9J8jJaUukNQA7EcuBy4NxQSfJqUlVFp0w5L248KunJpJqHyXoHUL
-                        bp8Cvy/cDjNUq9B2yT5HX/XmQQACFoejX4jUW02iVpWy9a5yYdEoC/JfxNURT/z5
-                        DHvDDSt/I+/5AAvBxerPW5S+yW9McklB8agN/npwZFD3g8kPThpBTP1hnaAg77rz
-                        6SXp204oMDGErh4rqDWcAIYEoIjBYwJQcx2DZGCxgM/ZQsPFrAlBzEYNsYLWAw9F
-                        Oy8MxbwH80Lc5Q8VGPVAAAAABJRU5ErkJggg==" width="40" height="40">
-                        Log in to <strong>LINE</strong> -->
-                    </button>
-                </div>
-            </div>
-            
             <br>
-    
             <form id="form-data">
                 <a data-toggle="collapse" href="#collapse1" role="button" aria-expanded="false" aria-controls="collapse1">
                     <h5 id="menu">Appetizers <i class="fa fa-angle-down"></i></h5>
