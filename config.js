@@ -13,7 +13,40 @@ else
 {
     document.getElementById('null_cart').style.visibility="hidden";
 }
-
+function modal_add_item()
+{
+    $("#modal_info").modal('show');
+    document.getElementById('modal_title').textContent='Success!';
+    document.getElementById('modal_body').textContent='Success add this item to cart';
+    $('#modal_info').on('hidden.bs.modal', function() {
+        location.reload();
+    });
+}
+function modal_delete_item()
+{
+    $("#modal_info").modal('show');
+    document.getElementById('modal_title').textContent='Success!';
+    document.getElementById('modal_body').textContent='Success delete this item from cart';
+    $('#modal_info').on('hidden.bs.modal', function() {
+        location.reload();
+    });
+}
+function modal_reset_order()
+{
+    $("#modal_info").modal('show');
+    document.getElementById('modal_title').textContent='Success!';
+    document.getElementById('modal_body').textContent='Succcss delete all items from cart';
+    $('#modal_info').on('hidden.bs.modal', function() {
+        location.reload();
+    });
+}
+function created_date()
+{
+    month = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Augu','Sept','Oct','Nov','Dec'];
+    date = new Date();
+    timestamp = date.getDate() + " " + month[date.getMonth()] + " " + date.getFullYear() + " " + date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+    return timestamp;
+}
 function showPage(x)
 {
     if(x=='showMenu')
@@ -21,12 +54,21 @@ function showPage(x)
         $('#showMenu').show();
         $('#showCart').hide();
         $('#showAcc').hide();
+        $('#showOrderHistory').hide();
     }
     else if(x=='showCart')
     {
         $('#showMenu').hide();
         $('#showCart').show();
         $('#showAcc').hide();
+        $('#showOrderHistory').hide();
+    }
+    else if(x=='showOrderHistory')
+    {
+        $('#showMenu').hide();
+        $('#showCart').hide();
+        $('#showAcc').hide();
+        $('#showOrderHistory').show();
     }
 }
 function showOrderItems()
@@ -47,6 +89,7 @@ function showOrderItems()
                     order_data[i].price,
                     order_data[i].prices,
                     total_prices,
+                    order_data[i].created_date
                 ); 
             } 
         }
@@ -56,7 +99,7 @@ function showOrderItems()
 function resetOrder()
 {
     localStorage.clear();
-    location.reload();
+    modal_reset_order();
     return false;
 }
 function deleteItem(id)
@@ -75,12 +118,12 @@ function deleteItem(id)
             
         }
         localStorage.setItem('order_data', JSON.stringify(order_data));
-        showPage('showMenu');
+        showPage('showCart');
     }
-    location.reload();
+    modal_delete_item();
     return false;
 }
-function writeData(id,menu_name,qty,price,prices,total_prices)
+function writeData(id,menu_name,qty,price,prices,total_prices,timestamp)
 {
     var total_price = document.getElementById('total_price');
     var order_table = document.getElementById('order_table');
@@ -89,7 +132,9 @@ function writeData(id,menu_name,qty,price,prices,total_prices)
     var qty_cell = row_table.insertCell();
     var price_cell = row_table.insertCell();
     var prices_cell = row_table.insertCell();
+    var date = row_table.insertCell();
     var action_cell = row_table.insertCell();
+    
 
     menu_cell.innerHTML = menu_name;
     qty_cell.innerHTML = qty;
@@ -99,6 +144,7 @@ function writeData(id,menu_name,qty,price,prices,total_prices)
     action_cell.innerHTML = 
     '<button class="btn btn-danger" type="button" onclick="deleteItem(\''+id+'\')"><i class="fa fa-trash"></i></button>';
     document.getElementById('cart_badge').innerHTML = order_data.length;
+    date.innerHTML = timestamp;
 }
 function addToCart1()
 {
@@ -120,14 +166,19 @@ function addToCart1()
         'menu_name':menu_name,
         'qty':parseInt(qty),
         'price':parseInt(price),
-        'prices':parseInt(qty)*parseInt(price)
+        'prices':parseInt(qty)*parseInt(price),
+        'created_date':created_date()
     };
     order_data.push(objData);
     localStorage.setItem('order_data',JSON.stringify(order_data));
     localStorage.setItem('id_order',id_order);
     document.getElementById('form-data').reset();
+    $("#modal_info").modal('show');
+    document.getElementById('modal_body').textContent='Success add this item to cart';
+    $('#modal_info').on('hidden.bs.modal', function() {
+        location.reload();
+    });
     showPage('showMenu');
-    location.reload();
     return false;
 }
 function addToCart2()
@@ -150,14 +201,15 @@ function addToCart2()
         'menu_name':menu_name,
         'qty':parseInt(qty),
         'price':parseInt(price),
-        'prices':parseInt(qty)*parseInt(price)
+        'prices':parseInt(qty)*parseInt(price),
+        'created_date':created_date()
     };
     order_data.push(objData);
     localStorage.setItem('order_data',JSON.stringify(order_data));
     localStorage.setItem('id_order',id_order);
     document.getElementById('form-data').reset();
+    modal_add_item();
     showPage('showMenu');
-    location.reload();
     return false;
 }
 function addToCart3()
@@ -180,14 +232,15 @@ function addToCart3()
         'menu_name':menu_name,
         'qty':parseInt(qty),
         'price':parseInt(price),
-        'prices':parseInt(qty)*parseInt(price)
+        'prices':parseInt(qty)*parseInt(price),
+        'created_date':created_date()
     };
     order_data.push(objData);
     localStorage.setItem('order_data',JSON.stringify(order_data));
     localStorage.setItem('id_order',id_order);
     document.getElementById('form-data').reset();
+    modal_add_item();
     showPage('showMenu');
-    location.reload();
     return false;
 }
 function addToCart4()
@@ -210,14 +263,15 @@ function addToCart4()
         'menu_name':menu_name,
         'qty':parseInt(qty),
         'price':parseInt(price),
-        'prices':parseInt(qty)*parseInt(price)
+        'prices':parseInt(qty)*parseInt(price),
+        'created_date':created_date()
     };
     order_data.push(objData);
     localStorage.setItem('order_data',JSON.stringify(order_data));
     localStorage.setItem('id_order',id_order);
     document.getElementById('form-data').reset();
+    modal_add_item();
     showPage('showMenu');
-    location.reload();
     return false;
 }
 function addToCart5()
@@ -240,14 +294,15 @@ function addToCart5()
         'menu_name':menu_name,
         'qty':parseInt(qty),
         'price':parseInt(price),
-        'prices':parseInt(qty)*parseInt(price)
+        'prices':parseInt(qty)*parseInt(price),
+        'created_date':created_date()
     };
     order_data.push(objData);
     localStorage.setItem('order_data',JSON.stringify(order_data));
     localStorage.setItem('id_order',id_order);
     document.getElementById('form-data').reset();
+    modal_add_item();
     showPage('showMenu');
-    location.reload();
     return false;
 }
 function addToCart6()
@@ -270,14 +325,15 @@ function addToCart6()
         'menu_name':menu_name,
         'qty':parseInt(qty),
         'price':parseInt(price),
-        'prices':parseInt(qty)*parseInt(price)
+        'prices':parseInt(qty)*parseInt(price),
+        'created_date':created_date()
     };
     order_data.push(objData);
     localStorage.setItem('order_data',JSON.stringify(order_data));
     localStorage.setItem('id_order',id_order);
     document.getElementById('form-data').reset();
+    modal_add_item();
     showPage('showMenu');
-    location.reload();
     return false;
 }
 function addToCart7()
@@ -300,14 +356,15 @@ function addToCart7()
         'menu_name':menu_name,
         'qty':parseInt(qty),
         'price':parseInt(price),
-        'prices':parseInt(qty)*parseInt(price)
+        'prices':parseInt(qty)*parseInt(price),
+        'created_date':created_date()
     };
     order_data.push(objData);
     localStorage.setItem('order_data',JSON.stringify(order_data));
     localStorage.setItem('id_order',id_order);
     document.getElementById('form-data').reset();
+    modal_add_item();
     showPage('showMenu');
-    location.reload();
     return false;
 }
 function addToCart8()
@@ -330,14 +387,15 @@ function addToCart8()
         'menu_name':menu_name,
         'qty':parseInt(qty),
         'price':parseInt(price),
-        'prices':parseInt(qty)*parseInt(price)
+        'prices':parseInt(qty)*parseInt(price),
+        'created_date':created_date()
     };
     order_data.push(objData);
     localStorage.setItem('order_data',JSON.stringify(order_data));
     localStorage.setItem('id_order',id_order);
     document.getElementById('form-data').reset();
+    modal_add_item();
     showPage('showMenu');
-    location.reload();
     return false;
 }
 function addToCart9()
@@ -360,14 +418,15 @@ function addToCart9()
         'menu_name':menu_name,
         'qty':parseInt(qty),
         'price':parseInt(price),
-        'prices':parseInt(qty)*parseInt(price)
+        'prices':parseInt(qty)*parseInt(price),
+        'created_date':created_date()
     };
     order_data.push(objData);
     localStorage.setItem('order_data',JSON.stringify(order_data));
     localStorage.setItem('id_order',id_order);
     document.getElementById('form-data').reset();
+    modal_add_item();
     showPage('showMenu');
-    location.reload();
     return false;
 }
 function addToCart10()
@@ -390,14 +449,15 @@ function addToCart10()
         'menu_name':menu_name,
         'qty':parseInt(qty),
         'price':parseInt(price),
-        'prices':parseInt(qty)*parseInt(price)
+        'prices':parseInt(qty)*parseInt(price),
+        'created_date':created_date()
     };
     order_data.push(objData);
     localStorage.setItem('order_data',JSON.stringify(order_data));
     localStorage.setItem('id_order',id_order);
     document.getElementById('form-data').reset();
+    modal_add_item();
     showPage('showMenu');
-    location.reload();
     return false;
 }
 function addToCart11()
@@ -420,14 +480,15 @@ function addToCart11()
         'menu_name':menu_name,
         'qty':parseInt(qty),
         'price':parseInt(price),
-        'prices':parseInt(qty)*parseInt(price)
+        'prices':parseInt(qty)*parseInt(price),
+        'created_date':created_date()
     };
     order_data.push(objData);
     localStorage.setItem('order_data',JSON.stringify(order_data));
     localStorage.setItem('id_order',id_order);
     document.getElementById('form-data').reset();
+    modal_add_item();
     showPage('showMenu');
-    location.reload();
     return false;
 }
 function addToCart12()
@@ -450,14 +511,15 @@ function addToCart12()
         'menu_name':menu_name,
         'qty':parseInt(qty),
         'price':parseInt(price),
-        'prices':parseInt(qty)*parseInt(price)
+        'prices':parseInt(qty)*parseInt(price),
+        'created_date':created_date()
     };
     order_data.push(objData);
     localStorage.setItem('order_data',JSON.stringify(order_data));
     localStorage.setItem('id_order',id_order);
     document.getElementById('form-data').reset();
+    modal_add_item();
     showPage('showMenu');
-    location.reload();
     return false;
 }
 function addToCart13()
@@ -480,14 +542,15 @@ function addToCart13()
         'menu_name':menu_name,
         'qty':parseInt(qty),
         'price':parseInt(price),
-        'prices':parseInt(qty)*parseInt(price)
+        'prices':parseInt(qty)*parseInt(price),
+        'created_date':created_date()
     };
     order_data.push(objData);
     localStorage.setItem('order_data',JSON.stringify(order_data));
     localStorage.setItem('id_order',id_order);
     document.getElementById('form-data').reset();
+    modal_add_item();
     showPage('showMenu');
-    location.reload();
     return false;
 }
 function addToCart14()
@@ -510,14 +573,15 @@ function addToCart14()
         'menu_name':menu_name,
         'qty':parseInt(qty),
         'price':parseInt(price),
-        'prices':parseInt(qty)*parseInt(price)
+        'prices':parseInt(qty)*parseInt(price),
+        'created_date':created_date()
     };
     order_data.push(objData);
     localStorage.setItem('order_data',JSON.stringify(order_data));
     localStorage.setItem('id_order',id_order);
     document.getElementById('form-data').reset();
+    modal_add_item();
     showPage('showMenu');
-    location.reload();
     return false;
 }
 function addToCart15()
@@ -540,14 +604,15 @@ function addToCart15()
         'menu_name':menu_name,
         'qty':parseInt(qty),
         'price':parseInt(price),
-        'prices':parseInt(qty)*parseInt(price)
+        'prices':parseInt(qty)*parseInt(price),
+        'created_date':created_date()
     };
     order_data.push(objData);
     localStorage.setItem('order_data',JSON.stringify(order_data));
     localStorage.setItem('id_order',id_order);
     document.getElementById('form-data').reset();
+    modal_add_item();
     showPage('showMenu');
-    location.reload();
     return false;
 }
 function addToCart16()
@@ -570,13 +635,14 @@ function addToCart16()
         'menu_name':menu_name,
         'qty':parseInt(qty),
         'price':parseInt(price),
-        'prices':parseInt(qty)*parseInt(price)
+        'prices':parseInt(qty)*parseInt(price),
+        'created_date':created_date()
     };
     order_data.push(objData);
     localStorage.setItem('order_data',JSON.stringify(order_data));
     localStorage.setItem('id_order',id_order);
     document.getElementById('form-data').reset();
+    modal_add_item();
     showPage('showMenu');
-    location.reload();
     return false;
 }
