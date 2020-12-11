@@ -48,8 +48,8 @@ function display()
 }
 function profile()
 {
-    document.getElementById('profile_img').innerHTML =  liff.getProfile().pictureUrl;
-    document.getElementById('profile_name').innerHTML =  liff.getProfile().displayName;
+    $('#profile_img img').attr('src', liff.getProfile().pictureUrl.pictureUrl);
+    $('#profile_name').html(liff.getProfile().displayName);
 }
 
 function modal_err_liff_id()
@@ -269,7 +269,6 @@ function message_order()
             modal_err_msg(err_msg);
         });
     }
-
 }
 function loadOrderData()
 {
