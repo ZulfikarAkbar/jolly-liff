@@ -48,14 +48,14 @@ function display()
 }
 function profile()
 {
-    $('#profile_img img').attr('src', liff.getProfile().pictureUrl.pictureUrl);
+    $('#profile_img img').attr('src', liff.getProfile().pictureUrl);
     $('#profile_name').html(liff.getProfile().displayName);
 }
 
 function modal_err_liff_id()
 {
     $("#modal_info").modal('show');
-    document.getElementById('modal_title').textContent='ERR_LIFF_ID!';
+    document.getElementById('modal_title').textContent='ERR_LIFF_ID';
     document.getElementById('modal_body').textContent='Ooops... LIFF ID not found';
     $('#modal_info').on('hidden.bs.modal', function() {
         location.reload();
