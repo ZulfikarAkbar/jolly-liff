@@ -43,21 +43,24 @@ function display()
     {
         document.getElementById('liffLoginButton').style.visibility="hidden";
         
-        document.getElementById('profile_img').src = liff.getProfile().pictureUrl;
-        document.getElementById('profile_name').innerHTML = liff.getProfile().displayName;
+        profile();
     }
     else
     {
         document.querySelector('.dropdown').style.visibility="hidden";
     }
 }
-// function profile()
-// {
-//     // $('#profile_img img').attr('src', liff.getProfile().pictureUrl);
-//     document.getElementById('profile_name').src = liff.getProfile().pictureUrl;
-//     document.getElementById('profile_name').innerHTML = liff.getProfile().displayName;
-//     // $('#profile_name').html(liff.getProfile().displayName);
-// }
+function profile()
+{
+    liff.getProfile()
+        .then(profile => {
+            document.getElementById('profile_img').src = profile.pictureUrl;
+            document.getElementById('profile_name').innerHTML = profile.displayName;
+        })
+        .catch((err) => {
+            console.log('error', err);
+        });
+}
 
 function modal_err_liff_id()
 {
