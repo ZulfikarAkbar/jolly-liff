@@ -393,9 +393,9 @@ function writeData(id,menu_name,qty,price,prices,total_prices,timestamp)
 
     menu_cell.innerHTML = menu_name;
     qty_cell.innerHTML = qty;
-    price_cell.innerHTML = price;
-    prices_cell.innerHTML = prices;
-    total_price.innerHTML = total_prices;
+    price_cell.innerHTML = '$'+price;
+    prices_cell.innerHTML = '$'+prices;
+    total_price.innerHTML = '$'+total_prices;
     action_cell.innerHTML = 
     '<button class="btn btn-danger" type="button" onclick="deleteItem(\''+id+'\')"><i class="fa fa-trash"></i></button>';
     document.getElementById('cart_badge').innerHTML = order_data.length;
