@@ -52,8 +52,10 @@ function display()
 }
 function profile()
 {
-    $('#profile_img img').attr('src', liff.getProfile().pictureUrl);
-    $('#profile_name').html(liff.getProfile().displayName);
+    // $('#profile_img img').attr('src', liff.getProfile().pictureUrl);
+    document.getElementById('profile_name').src = liff.getProfile().pictureUrl;
+    document.getElementById('profile_name').innerHTML = liff.getProfile().displayName;
+    // $('#profile_name').html(liff.getProfile().displayName);
 }
 
 function modal_err_liff_id()
