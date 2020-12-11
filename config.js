@@ -39,7 +39,7 @@ function initializeApp()
 }
 function display()
 {
-    if(liff.isLoggedIn() && liff.isInClient())
+    if(liff.isLoggedIn() || liff.isInClient())
     {
         document.getElementById('liffLoginButton').style.visibility="hidden";
         profile();
