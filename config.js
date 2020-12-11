@@ -4,7 +4,7 @@ $(".fa").on("click",function()
     $(this).toggleClass("fa-angle-down");
 });
 
-const defaultLiffId = "1655335438-WNGwJZ7n";
+const defaultLiffId = "1655335438-X8oEyJAW";
 let myLiffId = "";
 myLiffId = defaultLiffId;
 initializeLiffOrDie(myLiffId);
