@@ -1,14 +1,35 @@
+// not a function script
 $(".fa").on("click",function()
 {
     $(this).toggleClass("fa-angle-up");
     $(this).toggleClass("fa-angle-down");
 });
+if(localStorage.getItem('order_data')==null || JSON.parse(localStorage.getItem('order_data'))==0)
+{
+    document.getElementById('null_cart').textContent =  'Ooops... your cart is still empty';
+    document.getElementById('order_table').style.display="none";
+    document.getElementById('row_total_price').style.visibility="hidden";
+    document.getElementById('cart_badge').innerHTML = 0;
+}
+else
+{
+    document.getElementById('null_cart').style.visibility="hidden";
+}
+if(localStorage.getItem('fix_order_data')==null || JSON.parse(localStorage.getItem('fix_order_data'))==0)
+{
+    document.getElementById('null_order').textContent =  'Ooops... you have not order anything yet ';
+}
+else
+{
+    document.getElementById('null_order').style.visibility="hidden";
+}
 
+
+// LINE Front-end Framework
 const defaultLiffId = "1655335438-X8oEyJAW";
 let myLiffId = "";
 myLiffId = defaultLiffId;
 initializeLiffOrDie(myLiffId);
-
 function initializeLiffOrDie(myLiffId) 
 {
     if (!myLiffId) 
@@ -60,17 +81,6 @@ function profile()
             console.log('error', err);
         });
 }
-
-function modal_err_liff_id()
-{
-    $("#modal_info").modal('show');
-    document.getElementById('modal_title').textContent='ERR_LIFF_ID';
-    document.getElementById('modal_body').textContent='Ooops... LIFF ID not found';
-    $('#modal_info').on('hidden.bs.modal', function() {
-        location.reload();
-    });
-}
-
 function logout()
 {
     if (liff.isLoggedIn()) 
@@ -96,6 +106,16 @@ function openWindowBrowser()
     );
 }
 
+// modal interface
+function modal_err_liff_id()
+{
+    $("#modal_info").modal('show');
+    document.getElementById('modal_title').textContent='ERR_LIFF_ID';
+    document.getElementById('modal_body').textContent='Ooops... LIFF ID not found';
+    $('#modal_info').on('hidden.bs.modal', function() {
+        location.reload();
+    });
+}
 function modal_add_item()
 {
     $("#modal_info").modal('show');
@@ -123,6 +143,32 @@ function modal_reset_cart()
         location.reload();
     });
 }
+function modal_discard_send_msg()
+{
+    $("#modal_info").modal('show');
+    document.getElementById('modal_title').textContent='Sorry';
+    document.getElementById('modal_body').textContent='You are not using LINE browser, please use that if you want to continue';
+}
+function modal_success_msg(msg)
+{
+    $("#modal_info").modal('show');
+    document.getElementById('modal_title').textContent='Success!';
+    document.getElementById('modal_body').textContent=msg;
+    $('#modal_info').on('hidden.bs.modal', function() {
+        location.reload();
+    });
+}
+function modal_err_msg(err_msg)
+{
+    $("#modal_info").modal('show');
+    document.getElementById('modal_title').textContent='ERR_MESSAGE';
+    document.getElementById('modal_body').textContent=err_msg;
+    $('#modal_info').on('hidden.bs.modal', function() {
+        location.reload();
+    });
+}
+
+// date function
 function created_date()
 {
     month = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Augu','Sept','Oct','Nov','Dec'];
@@ -130,52 +176,35 @@ function created_date()
     timestamp = date.getDate() + " " + month[date.getMonth()] + " " + date.getFullYear() + " " + date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
     return timestamp;
 }
+
+// manage user willingness
 function showPage(x)
 {
     if(x=='showMenu')
     {
         $('#showMenu').show();
         $('#showCart').hide();
-        $('#showHistory').hide();
-        loadOrderData();
+        // $('#showHistory').hide();
+        // loadOrderData();
     }
     else if(x=='showCart')
     {
         $('#showMenu').hide();
         $('#showCart').show();
-        $('#showHistory').hide();
-        loadOrderData();
+        // $('#showHistory').hide();
+        // loadOrderData();
     }
-    else if(x=='showHistory')
-    {
-        $('#showMenu').hide();
-        $('#showCart').hide();
-        $('#showHistory').show();
-        loadOrderData();
-    }
-}
-if(localStorage.getItem('order_data')==null || JSON.parse(localStorage.getItem('order_data'))==0)
-{
-    document.getElementById('null_cart').textContent =  'Ooops... your cart is still empty';
-    document.getElementById('order_table').style.display="none";
-    document.getElementById('row_total_price').style.visibility="hidden";
-    document.getElementById('cart_badge').innerHTML = 0;
-}
-else
-{
-    document.getElementById('null_cart').style.visibility="hidden";
-}
-
-if(localStorage.getItem('fix_order_data')==null || JSON.parse(localStorage.getItem('fix_order_data'))==0)
-{
-    document.getElementById('null_order').textContent =  'Ooops... you have not order anything yet ';
-}
-else
-{
-    document.getElementById('null_order').style.visibility="hidden";
+    // else if(x=='showHistory')
+    // {
+    //     $('#showMenu').hide();
+    //     $('#showCart').hide();
+    //     $('#showHistory').show();
+    //     loadOrderData();
+    // }
 }
 
 
+// many dizzying function but it's work :)
 function showOrderItems()
 {
     if(localStorage.order_data && localStorage.id_order)
@@ -232,30 +261,7 @@ function orderNow()
         }
     }
 }
-function modal_discard_send_msg()
-{
-    $("#modal_info").modal('show');
-    document.getElementById('modal_title').textContent='Sorry';
-    document.getElementById('modal_body').textContent='You are not using LINE browser, please use that if you want to continue';
-}
-function modal_success_msg(msg)
-{
-    $("#modal_info").modal('show');
-    document.getElementById('modal_title').textContent='Success!';
-    document.getElementById('modal_body').textContent=msg;
-    $('#modal_info').on('hidden.bs.modal', function() {
-        location.reload();
-    });
-}
-function modal_err_msg(err_msg)
-{
-    $("#modal_info").modal('show');
-    document.getElementById('modal_title').textContent='ERR_MESSAGE';
-    document.getElementById('modal_body').textContent=err_msg;
-    $('#modal_info').on('hidden.bs.modal', function() {
-        location.reload();
-    });
-}
+
 function message_order()
 {
     var order_data = JSON.parse(localStorage.getItem('order_data'));
@@ -395,6 +401,8 @@ function writeData(id,menu_name,qty,price,prices,total_prices,timestamp)
     document.getElementById('cart_badge').innerHTML = order_data.length;
     date.innerHTML = timestamp;
 }
+
+// sorry for this many function, ok ;)
 function addToCart1()
 {
     menu_name = document.getElementById('menu_name1').innerHTML;
