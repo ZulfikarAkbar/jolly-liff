@@ -236,10 +236,7 @@ function modal_discard_send_msg()
 {
     $("#modal_info").modal('show');
     document.getElementById('modal_title').textContent='Sorry';
-    document.getElementById('modal_body').textContent='You are not using LINE browser, please use that if you want continue';
-    $('#modal_info').on('hidden.bs.modal', function() {
-        location.reload();
-    });
+    document.getElementById('modal_body').textContent='You are not using LINE browser, please use that if you want to continue';
 }
 function modal_success_msg(msg)
 {
