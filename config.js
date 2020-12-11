@@ -43,7 +43,7 @@ function display()
     {
         document.getElementById('liffLoginButton').style.visibility="hidden";
         
-        document.getElementById('profile_name').src = liff.getProfile().pictureUrl;
+        document.getElementById('profile_img').src = liff.getProfile().pictureUrl;
         document.getElementById('profile_name').innerHTML = liff.getProfile().displayName;
     }
     else
