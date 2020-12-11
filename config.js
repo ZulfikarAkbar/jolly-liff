@@ -4,7 +4,6 @@ $(".fa").on("click",function()
     $(this).toggleClass("fa-angle-down");
 });
 
-// I got problem with LIFF_ID_NOT_FOUND
 const defaultLiffId = "1655335438-WNGwJZ7n";
 let myLiffId = "";
 myLiffId = defaultLiffId;
@@ -63,7 +62,6 @@ function modal_err_liff_id()
     });
 }
 
-
 function logout()
 {
     if (liff.isLoggedIn()) 
@@ -107,7 +105,7 @@ function modal_delete_item()
         location.reload();
     });
 }
-function modal_reset_order()
+function modal_reset_cart()
 {
     $("#modal_info").modal('show');
     document.getElementById('modal_title').textContent='Success!';
@@ -129,18 +127,25 @@ function showPage(x)
     {
         $('#showMenu').show();
         $('#showCart').hide();
-        $('#showAcc').hide();
-        
+        $('#showHistory').hide();
+        loadOrderData();
     }
     else if(x=='showCart')
     {
         $('#showMenu').hide();
         $('#showCart').show();
-        $('#showAcc').hide();
-        
+        $('#showHistory').hide();
+        loadOrderData();
+    }
+    else if(x=='showHistory')
+    {
+        $('#showMenu').hide();
+        $('#showCart').hide();
+        $('#showHistory').show();
+        loadOrderData();
     }
 }
-if(localStorage.getItem('order_data')===null || JSON.parse(localStorage.getItem('order_data'))==0)
+if(localStorage.getItem('order_data')==null || JSON.parse(localStorage.getItem('order_data'))==0)
 {
     document.getElementById('null_cart').textContent =  'Ooops... your cart is still empty';
     document.getElementById('order_table').style.display="none";
@@ -151,6 +156,18 @@ else
 {
     document.getElementById('null_cart').style.visibility="hidden";
 }
+
+if(localStorage.getItem('fix_order_data')==null || JSON.parse(localStorage.getItem('fix_order_data'))==0)
+{
+    document.getElementById('null_order').textContent =  'Ooops... you have not order anything yet ';
+    // document.getElementById('order_badge').innerHTML = 0;
+}
+else
+{
+    document.getElementById('null_order').style.visibility="hidden";
+}
+
+
 function showOrderItems()
 {
     if(localStorage.order_data && localStorage.id_order)
@@ -161,7 +178,7 @@ function showOrderItems()
             var total_prices = 0
             for(i in order_data)
             {
-                total_prices = total_prices+order_data[i].prices;
+                total_prices += order_data[i].prices;
                 writeData(
                     order_data[i].id_order,
                     order_data[i].menu_name,
@@ -176,10 +193,142 @@ function showOrderItems()
     }
     return false;
 }
-function resetOrder()
+function orderNow()
 {
-    localStorage.clear();
-    modal_reset_order();
+    if(localStorage.order_data)
+    {
+        var order_data = JSON.parse(localStorage.getItem('order_data'));
+        var id=0;
+        var fix_order_data = [];
+        if(localStorage.fix_order_data)
+        {
+            fix_order_data = JSON.parse(localStorage.getItem('fix_order_data'));
+            id = fix_order_data.length;
+        }
+        var objData={
+            'id_history':id+1,
+            'menu_data':order_data,
+            'created_date':created_date()
+        };
+        fix_order_data.push(objData);
+        localStorage.setItem('fix_order_data',JSON.stringify(fix_order_data));
+        localStorage.setItem('id',id);
+        message_order()
+        localStorage.removeItem('order_data');
+    }
+}
+function modal_success_msg(msg)
+{
+    $("#modal_info").modal('show');
+    document.getElementById('modal_title').textContent='Success!';
+    document.getElementById('modal_body').textContent=msg;
+    $('#modal_info').on('hidden.bs.modal', function() {
+        location.reload();
+    });
+}
+function modal_err_msg(err_msg)
+{
+    $("#modal_info").modal('show');
+    document.getElementById('modal_title').textContent='ERR_MESSAGE';
+    document.getElementById('modal_body').textContent=err_msg;
+    $('#modal_info').on('hidden.bs.modal', function() {
+        location.reload();
+    });
+}
+function message_order()
+{
+    var order_data = JSON.parse(localStorage.getItem('order_data'));
+    msg = '';
+    if(liff.isLoggedIn())
+    {
+        msg += liff.getProfile().displayName; + ' ' + 'just bought something!';
+    }
+    else
+    {
+        msg += 'You just bought something!';
+    }
+    var total_prices = 0;
+    for(i in order_data)
+    {
+        total_prices = total_prices+order_data[i].prices;
+        msg += '(' + order_data[i].qty + ' ' + order_data[i].menu_name + ' ~ ' + '1 x $' + order_data[i].price +'), ';
+    }
+    msg+=' with total $' + total_prices;
+
+    if (!liff.isInClient()) 
+    {
+        modal_success_msg(msg);
+    } 
+    else 
+    {
+        liff.sendMessages([{
+            'type': 'text',
+            'text': msg
+        }]).catch(function(error) {
+            err_msg = 'Error sending message: ' + error;
+            modal_err_msg(err_msg);
+        });
+    }
+
+}
+function loadOrderData()
+{
+        var fix_order_data = [];
+        var order_detail='';
+        var total_prices = 0
+        if(localStorage.fix_order_data)
+        {
+            var fix_order_data = JSON.parse(localStorage.getItem('fix_order_data'));
+            for(i in fix_order_data)
+            {
+                for(j in fix_order_data[i].menu_data)
+                {
+                    total_prices += fix_order_data[i].menu_data[j].prices;
+                    order_detail+='<br><div class="row" id="row_timestamp"></div><br>';
+                    order_detail+=
+                    '<table id="fix_order_table" width=100%><tr id="thead"><th>Name</th><th>Qty</th><th>Price ($)</th><th>Price total($)</th></tr></table>';
+                    order_detail+='<br><br><div class="row" id="row_total"></div><br><br>';
+                    var fix_order_table = document.getElementById('fix_order_table');
+                    var row_timestamp = document.getElementById('row_timestamp');
+                    var row_total = document.getElementById('row_total');
+                    // var row = $('<tr>');
+                    // row.append($("<td>fix_order_data[i].menu_data[j].menu_name</td>"))
+                    // .append($("<td>Text-1</td>"))
+                    // .append($("<td>Text-1</td>"))
+                    // .append($("<td>Text-1</td>"));
+                    // $("#fix_order_table").append(row);
+                    // fix_row_table = fix_order_table.insertRow();
+                    // var namecell = fix_row_table.insertCell();
+                    // var qtycell = fix_row_table.insertCell();
+                    // var pricecell = fix_row_table.insertCell();;
+                    // var pricescell = fix_row_table.insertCell();
+                    // namecell.innerHTML = fix_order_data[i].menu_data[j].menu_name;
+                    // qtycell.innerHTML = fix_order_data[i].menu_data[j].qty;
+                    // pricecell.innerHTML = fix_order_data[i].menu_data[j].price;
+                    // pricescell.innerHTML = fix_order_data[i].menu_data[j].prices;
+                    // row_total.innerHTML = total_prices;
+                    // row_timestamp.innerHTML=fix_order_data[i].menu_data[j].created_date;
+                    // order_detail+= `<div class="row">`+fix_order_data[i].menu_data[j].created_date;+`</div>
+                    // <br/>
+                    // <div class="row">
+                    //     <div class="col-3">`+fix_order_data[i].menu_data[j].menu_name;+`</div>
+                    //     <div class="col-3">`+fix_order_data[i].menu_data[j].qty;+ `x $` +fix_order_data[i].menu_data[j].price;+`</div>
+                    //     <div class="col-3">`+fix_order_data[i].menu_data[j].prices;+`</div>
+                    // </div>
+                    // <div class="row"> TOTAL = $` +total_prices;+ `</div>`
+                    document.getElementById('final_order').innerHTML = order_detail;
+                }
+                
+            }  
+        }
+        // document.getElementById('order_badge').innerHTML = fix_order_data.length;
+        
+    
+}
+function resetCart()
+{
+    localStorage.removeItem('order_data');
+    modal_reset_cart();
     return false;
 }
 function deleteItem(id)

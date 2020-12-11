@@ -66,19 +66,19 @@
     <!-- ------------------------------------------------------------------------------------------------------ -->
     <nav class="navbar fixed-bottom navbar-light">
         <div class="row" style="align-items: center;width: 100%; margin: auto;">
+            <!-- <div class="col-4 text-center">
+                <a class="btn my-2 my-sm-0" href="javascript:void(0)" onclick="showPage('showHistory')">
+                    <i class="fa fa-book"></i>
+                </a>
+            </div> -->
             <div class="col-6 text-center">
                 <a class="btn my-2 my-sm-0" href="javascript:void(0)" onclick="showPage('showMenu')">
-                    <i class="fa fa-clipboard-check"></i>
-                    <br>
-                    Menu  
+                    <i class="fa fa-shopping-bag"></i>
                 </a>
             </div>
             <div class="col-6 text-center">
                 <a class="btn my-2 my-sm-0" href="javascript:void(0)" onclick="showPage('showCart')">
-                    <i class="fa fa-shopping-cart"></i>
-                    <span id="cart_badge" class="badge badge-cart"></span>
-                    <br>
-                    Cart
+                    <i class="fa fa-shopping-cart"></i><span id="cart_badge" class="badge"></span>
                 </a>
             </div>
         </div>
@@ -95,12 +95,22 @@
         </div>
     </div>
     <!-- ------------------------------------------------------------------------------------------------------ -->
+    <div id="showHistory" style="display: none">
+        <br>
+        <div class="container">
+            <h5 id="null_order" class="alert alert-warning" role="alert"></h5>
+        </div>
+        <div class="container" id="final_order">
+        </div>
+    </div>
+    <!-- ------------------------------------------------------------------------------------------------------ -->
     <div id="showCart" style="display: none">
         <br>
         <div class="container">
             <h5 id="null_cart" class="alert alert-warning" role="alert"></h5>
         </div>
-        <div class="container" id="final_order">
+        <div class="container" id="final_cart">
+            <hr>
             <div class="row">
                 <table id="order_table" width=100%>
                     <tr id="thead">
@@ -114,14 +124,15 @@
                 </table>
             </div>
             <hr>
-            <br><br>
+            
             <div class="row" id="row_total_price">
                 <div class="col-6" id="total_price_title">TOTAL ($)</div>
                 <div class="col-6" id="total_price"></div>
                 <br>
                 <br>
-                
-                <input id="reset_btn" class="btn my-2 my-sm-0" type="button" onclick="resetOrder()" value="X cancel">
+                <br>
+                <br>
+                <input id="reset_btn" class="btn my-2 my-sm-0" type="button" onclick="resetCart()" value="X cancel">
                 <br><br><br>
                 <input id="order_btn" value="Order now" type="button" onclick="orderNow()" class="btn btn-success my-2 my-sm-0"> 
             </div>
@@ -492,42 +503,8 @@
                 </div>
                 <br><br>
                 <hr>
-    
-                <!-- <div class="container" id="final_order">
-                    <div class="row">
-                        <table id="order_table" width=100%>
-                            <tr id="thead">
-                                <th>Name</th>
-                                <th>Qty</th>
-                                <th>Price ($)</th>
-                                <th>Price total($)</th>
-                                <th>Action</th>
-                            </tr>  
-                        </table>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-6" id="total_price_title">TOTAL ($)</div>
-                        <div class="col-6" id="total_price"></div>
-                    </div>
-                    <br>
-                    
-                </div>
-                <input id="reset_btn" class="btn btn-secondary" type="button" onclick="resetOrder()" value="X cancel">
-                <input id="sendMessageButton" value="Check out" type="button" onclick="orderNow()" class="btn btn-success"> -->
+
             </form>
-            
-            
-            
-            <!-- <div class="row">
-                <div class="col-xl-4"></div>
-                <div class="col-xl-4">
-                    <button class="btn" id="openWindowButton">Open in external browser <i class="fa fa-chevron-circle-right"></i></button>
-                    
-                    <button class="btn" id="liffLogoutButton">Logout <i class="fa fa-arrow-right"></i></button>
-                </div>
-                <div class="col-xl-4"></div>
-           </div> -->
     
         </div>
     </div>
@@ -539,9 +516,9 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
 
-
 <!-- LIFF SDK -->
 <script type="text/javascript" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 <script type="text/javascript" src="https://static.line-scdn.net/liff/edge/2/ios-extensions.js"></script>
+
 <script type="text/javascript" src="config.js"></script>
 </html>
