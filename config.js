@@ -39,7 +39,7 @@ function initializeApp()
 }
 function display()
 {
-    if(liff.isLoggedIn() || liff.isInClient())
+    if(liff.isLoggedIn() && liff.isInClient())
     {
         document.getElementById('liffLoginButton').style.visibility="hidden";
         profile();
@@ -169,7 +169,6 @@ else
 if(localStorage.getItem('fix_order_data')==null || JSON.parse(localStorage.getItem('fix_order_data'))==0)
 {
     document.getElementById('null_order').textContent =  'Ooops... you have not order anything yet ';
-    // document.getElementById('order_badge').innerHTML = 0;
 }
 else
 {
@@ -204,27 +203,43 @@ function showOrderItems()
 }
 function orderNow()
 {
-    if(localStorage.order_data)
+    if(!liff.isInClient())
     {
-        var order_data = JSON.parse(localStorage.getItem('order_data'));
-        var id=0;
-        var fix_order_data = [];
-        if(localStorage.fix_order_data)
-        {
-            fix_order_data = JSON.parse(localStorage.getItem('fix_order_data'));
-            id = fix_order_data.length;
-        }
-        var objData={
-            'id_history':id+1,
-            'menu_data':order_data,
-            'created_date':created_date()
-        };
-        fix_order_data.push(objData);
-        localStorage.setItem('fix_order_data',JSON.stringify(fix_order_data));
-        localStorage.setItem('id',id);
-        message_order()
-        localStorage.removeItem('order_data');
+        modal_discard_send_msg();
     }
+    else
+    {
+        if(localStorage.order_data)
+        {
+            var order_data = JSON.parse(localStorage.getItem('order_data'));
+            var id=0;
+            var fix_order_data = [];
+            if(localStorage.fix_order_data)
+            {
+                fix_order_data = JSON.parse(localStorage.getItem('fix_order_data'));
+                id = fix_order_data.length;
+            }
+            var objData={
+                'id_history':id+1,
+                'menu_data':order_data,
+                'created_date':created_date()
+            };
+            fix_order_data.push(objData);
+            localStorage.setItem('fix_order_data',JSON.stringify(fix_order_data));
+            localStorage.setItem('id',id);
+            message_order()
+            localStorage.removeItem('order_data');
+        }
+    }
+}
+function modal_discard_send_msg()
+{
+    $("#modal_info").modal('show');
+    document.getElementById('modal_title').textContent='Sorry';
+    document.getElementById('modal_body').textContent='You are not using LINE browser, please use that if you want continue';
+    $('#modal_info').on('hidden.bs.modal', function() {
+        location.reload();
+    });
 }
 function modal_success_msg(msg)
 {
