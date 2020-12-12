@@ -272,21 +272,13 @@ function message_order()
     msg = '';
     if(liff.isInClient())
     {
-        liff.getProfile()
-        .then(profile => {
-            name = profile.displayName
-            msg += name + ' ' + 'just bought something! '
-            var total_prices = 0;
-            for(i in order_data)
-            {
-                total_prices = total_prices+order_data[i].prices;
-                msg += '(' + order_data[i].qty + 'pcs ' + order_data[i].menu_name + ' with price total = $' + order_data[i].prices + ' ~ ' + '1pcs = $' + order_data[i].price +'), '
-            }
-        })
-        .catch((err) => {
-            console.log('error', err);
-        });
-        
+        msg += 'You just bought something! '
+        var total_prices = 0;
+        for(i in order_data)
+        {
+            total_prices = total_prices+order_data[i].prices;
+            msg += '(' + order_data[i].qty + 'pcs ' + order_data[i].menu_name + ' with price total = $' + order_data[i].prices + ' ~ ' + '1pcs = $' + order_data[i].price +'), '
+        }
         msg+=' with TOTAL ALL = $' + total_prices + '. Thanks!'
         
         modal_msg = msg + '. Please see your LINE message for your order history.'
