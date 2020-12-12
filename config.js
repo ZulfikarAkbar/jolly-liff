@@ -68,6 +68,7 @@ function display()
     if(liff.isInClient())
     {
         document.getElementById('dropdown_logout').style.visibility="hidden";
+        document.getElementById('dropdown_log_out').style.visibility="hidden";
     }
     else
     {
@@ -274,20 +275,16 @@ function message_order()
     {
         liff.getProfile()
             .then(profile => {
-                user = profile.displayName
+                const name = profile.displayName
+                msg += name.displayName + ' ' + 'just bought something! '
+                var total_prices = 0;
+                for(i in order_data)
+                {
+                    total_prices = total_prices+order_data[i].prices;
+                    msg += '(' + order_data[i].qty + 'pcs ' + order_data[i].menu_name + ' with price total = $' + order_data[i].prices + ' ~ ' + '1pcs = $' + order_data[i].price +'), '
+                }
+                msg+=' with TOTAL ALL = $' + total_prices + '. Thanks!'
         })
-        .catch((err) => {
-            console.log('error', err);
-        });
-        username = user
-        msg += username.displayName + ' ' + 'just bought something! '
-        var total_prices = 0;
-        for(i in order_data)
-        {
-            total_prices = total_prices+order_data[i].prices;
-            msg += '(' + order_data[i].qty + 'pcs ' + order_data[i].menu_name + ' with price total = $' + order_data[i].prices + ' ~ ' + '1pcs = $' + order_data[i].price +'), '
-        }
-        msg+=' with TOTAL ALL = $' + total_prices + '. Thanks!'
         modal_msg = msg + '. Please see your LINE message for your order history.'
         line_msg = '[Order history: ' + created_date() + ']' + ' ' + msg
         modal_success_msg(modal_msg);
