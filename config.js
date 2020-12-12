@@ -69,6 +69,14 @@ function display()
     {
         document.querySelector('.dropdown').style.visibility="hidden";
     }
+    if(liff.isInClient())
+    {
+        document.getElementById('dropdown_logout').style.visibility="hidden";
+    }
+    else
+    {
+        document.getElementById('openWindowButton').style.visibility="hidden";
+    }
 }
 function profile()
 {
