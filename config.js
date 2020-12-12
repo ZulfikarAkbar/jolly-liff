@@ -151,7 +151,7 @@ function modal_discard_send_msg()
 {
     $("#modal_info").modal('show');
     document.getElementById('modal_title').textContent='Sorry';
-    document.getElementById('modal_body').textContent='You are not using LINE browser, please use that if you want to continue';
+    document.getElementById('modal_body').textContent='You are not using LINE browser, please use that if you want to order';
 }
 function modal_success_msg(msg)
 {
@@ -273,26 +273,21 @@ function message_order()
     if(liff.isInClient())
     {
         liff.getProfile()
-        .then(profile => {
-            msg += profile.displayName; + ' ' + 'just bought something! ';
+            .then(profile => {
+                msg += profile.displayName; + ' ' + 'just bought something! ';
         })
-    }
-    else
-    {
-        msg += 'You just bought something! ';
-    }
-    var total_prices = 0;
-    for(i in order_data)
-    {
-        total_prices = total_prices+order_data[i].prices;
-        msg += '(' + order_data[i].qty + ' ' + order_data[i].menu_name + ' ~ ' + '1 x $' + order_data[i].price +'), ';
-    }
-    msg+=' with total $' + total_prices;
-
-    if (liff.isInClient()) 
-    {
+        .catch((err) => {
+            console.log('error', err);
+        });
+        var total_prices = 0;
+        for(i in order_data)
+        {
+            total_prices = total_prices+order_data[i].prices;
+            msg += '(' + order_data[i].qty + 'pcs ' + order_data[i].menu_name + ' with price total = ' + order_data[i].prices; + ' ~ ' + '1pcs = $' + order_data[i].price +'), ';
+        }
+        msg+=' with TOTAL ALL = $' + total_prices + '. Thanks!';
         modal_msg = msg + '. Please see your LINE message for your order history.';
-        line_msg = 'Order history: ' + msg;
+        line_msg = '[Order history: ' + created_date(); + ']' + ' ' + msg;
         modal_success_msg(modal_msg);
         liff.sendMessages([{
             'type': 'text',
