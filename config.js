@@ -272,18 +272,22 @@ function message_order()
     msg = '';
     if(liff.isInClient())
     {
-        liff.getProfile()
-            .then(profile => {
-                msg += profile.displayName + ' ' + 'just bought something! '
-                var total_prices = 0;
-                for(i in order_data)
-                {
-                    total_prices = total_prices+order_data[i].prices;
-                    msg += '(' + order_data[i].qty + 'pcs ' + order_data[i].menu_name + ' with price total = $' + order_data[i].prices + ' ~ ' + '1pcs = $' + order_data[i].price +'), '
-                }
-                msg+=' with TOTAL ALL = $' + total_prices + '. Thanks!'
-        });
-        modal_msg = msg + '. We also send this order history to your LINE message.'
+        // liff.getProfile()
+        //     .then(profile => {
+        //         msg += profile.displayName + ' ' + 'just bought something! '
+        // })
+        // .catch((err) => {
+        //     console.log('error', err);
+        // });
+        msg += liff.getProfile().displayName + ' ' + 'just bought something! '
+        var total_prices = 0;
+        for(i in order_data)
+        {
+            total_prices = total_prices+order_data[i].prices;
+            msg += '(' + order_data[i].qty + 'pcs ' + order_data[i].menu_name + ' with price total = $' + order_data[i].prices + ' ~ ' + '1pcs = $' + order_data[i].price +'), '
+        }
+        msg+=' with TOTAL ALL = $' + total_prices + '. Thanks!'
+        modal_msg = msg + '. Please see your LINE message for your order history.'
         line_msg = '[Order history: ' + created_date() + ']' + ' ' + msg
         modal_success_msg(modal_msg);
         liff.sendMessages([{
