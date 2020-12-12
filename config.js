@@ -274,9 +274,7 @@ function message_order()
     {
         liff.getProfile()
         .then(profile => {
-            document.getElementById('profile_img').src = profile.pictureUrl;
-            document.getElementById('profile_name').innerHTML = profile.displayName;
-            const name = profile.displayName
+            name = profile.displayName
             msg += name + ' ' + 'just bought something! '
             var total_prices = 0;
             for(i in order_data)
