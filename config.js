@@ -272,15 +272,15 @@ function message_order()
     msg = '';
     if(liff.isInClient())
     {
-        // liff.getProfile()
-        //     .then(profile => {
-        //         msg += profile.displayName + ' ' + 'just bought something! '
-        // })
-        // .catch((err) => {
-        //     console.log('error', err);
-        // });
-        user = liff.getProfile();
-        msg += user.displayName + ' ' + 'just bought something! '
+        liff.getProfile()
+            .then(profile => {
+                user = profile.displayName
+        })
+        .catch((err) => {
+            console.log('error', err);
+        });
+        username = user
+        msg += username.displayName + ' ' + 'just bought something! '
         var total_prices = 0;
         for(i in order_data)
         {
