@@ -270,13 +270,13 @@ function message_order()
 {
     var order_data = JSON.parse(localStorage.getItem('order_data'));
     msg = '';
-    if(liff.isLoggedIn())
+    if(liff.isInClient())
     {
-        msg += liff.getProfile().displayName; + ' ' + 'just bought something!';
+        msg += liff.getProfile().displayName; + ' ' + 'just bought something! ';
     }
     else
     {
-        msg += 'You just bought something!';
+        msg += 'You just bought something! ';
     }
     var total_prices = 0;
     for(i in order_data)
@@ -286,15 +286,14 @@ function message_order()
     }
     msg+=' with total $' + total_prices;
 
-    if (!liff.isInClient()) 
+    if (liff.isInClient()) 
     {
-        modal_success_msg(msg);
-    } 
-    else 
-    {
+        modal_msg = msg + '. Please see your LINE message for your order history.';
+        line_msg = 'Order history: ' + msg;
+        modal_success_msg(modal_msg);
         liff.sendMessages([{
             'type': 'text',
-            'text': msg
+            'text': line_msg
         }]).catch(function(error) {
             err_msg = 'Error sending message: ' + error;
             modal_err_msg(err_msg);
@@ -352,8 +351,6 @@ function loadOrderData()
             }  
         }
         // document.getElementById('order_badge').innerHTML = fix_order_data.length;
-        
-    
 }
 function resetCart()
 {
