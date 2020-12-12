@@ -287,7 +287,7 @@ function message_order()
         }
         msg+=' with TOTAL ALL = $' + total_prices + '. Thanks!'
         modal_msg = msg + '. Please see your LINE message for your order history.'
-        line_msg = '[Order history: ' + created_date(); + ']' + ' ' + msg
+        line_msg = '[Order history: ' + created_date() + ']' + ' ' + msg
         modal_success_msg(modal_msg);
         liff.sendMessages([{
             'type': 'text',
