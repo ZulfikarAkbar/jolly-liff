@@ -279,7 +279,8 @@ function message_order()
         // .catch((err) => {
         //     console.log('error', err);
         // });
-        msg += liff.getProfile().displayName + ' ' + 'just bought something! '
+        user = liff.getProfile();
+        msg += user.displayName + ' ' + 'just bought something! '
         var total_prices = 0;
         for(i in order_data)
         {
