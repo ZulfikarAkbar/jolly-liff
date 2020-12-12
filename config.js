@@ -272,14 +272,23 @@ function message_order()
     msg = '';
     if(liff.isInClient())
     {
-        const name = profile.displayName
-        msg += name.displayName + ' ' + 'just bought something! '
-        var total_prices = 0;
-        for(i in order_data)
-        {
-            total_prices = total_prices+order_data[i].prices;
-            msg += '(' + order_data[i].qty + 'pcs ' + order_data[i].menu_name + ' with price total = $' + order_data[i].prices + ' ~ ' + '1pcs = $' + order_data[i].price +'), '
-        }
+        liff.getProfile()
+        .then(profile => {
+            document.getElementById('profile_img').src = profile.pictureUrl;
+            document.getElementById('profile_name').innerHTML = profile.displayName;
+            const name = profile.displayName
+            msg += name + ' ' + 'just bought something! '
+            var total_prices = 0;
+            for(i in order_data)
+            {
+                total_prices = total_prices+order_data[i].prices;
+                msg += '(' + order_data[i].qty + 'pcs ' + order_data[i].menu_name + ' with price total = $' + order_data[i].prices + ' ~ ' + '1pcs = $' + order_data[i].price +'), '
+            }
+        })
+        .catch((err) => {
+            console.log('error', err);
+        });
+        
         msg+=' with TOTAL ALL = $' + total_prices + '. Thanks!'
         
         modal_msg = msg + '. Please see your LINE message for your order history.'
