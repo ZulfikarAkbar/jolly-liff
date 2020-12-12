@@ -69,10 +69,6 @@ function display()
     {
         document.getElementById('dropdown_logout').style.visibility="hidden";
     }
-    else
-    {
-        document.getElementById('openWindowButton').style.visibility="hidden";
-    }
 }
 function profile()
 {
