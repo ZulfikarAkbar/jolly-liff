@@ -65,7 +65,7 @@ function display()
         document.getElementById('liffLoginButton').style.visibility="hidden";
         profile();
     }
-    if(liff.isInClient())
+    else if(liff.isInClient())
     {
         document.getElementById('dropdown_logout').style.visibility="hidden";
     }
