@@ -283,8 +283,8 @@ function message_order()
                     total_prices = total_prices+order_data[i].prices;
                     msg += '(' + order_data[i].qty + 'pcs ' + order_data[i].menu_name + ' with price total = $' + order_data[i].prices + ' ~ ' + '1pcs = $' + order_data[i].price +'), '
                 }
-                msg+=' with TOTAL ALL = $' + total_prices + '. Thanks!'
         })
+        msg+=' with TOTAL ALL = $' + total_prices + '. Thanks!'
         modal_msg = msg + '. Please see your LINE message for your order history.'
         line_msg = '[Order history: ' + created_date() + ']' + ' ' + msg
         modal_success_msg(modal_msg);
