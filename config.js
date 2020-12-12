@@ -272,7 +272,10 @@ function message_order()
     msg = '';
     if(liff.isInClient())
     {
-        msg += liff.getProfile().displayName; + ' ' + 'just bought something! ';
+        liff.getProfile()
+        .then(profile => {
+            msg += profile.displayName; + ' ' + 'just bought something! ';
+        })
     }
     else
     {
